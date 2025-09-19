@@ -1,0 +1,378 @@
+.music-section {
+  margin-top: 60px;
+  margin-bottom: 40px;
+  padding: 0 20px;
+}
+
+.music-section:first-child {
+  margin-top: 40px; /* Ít khoảng cách hơn cho section đầu tiên */
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 0 20px;
+}
+
+.section-title-wrapper {
+  flex: 1;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 5px 0;
+  background: linear-gradient(45deg, #fff, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: #888;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.section-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.scroll-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scroll-btn:hover {
+  background: rgba(255, 107, 107, 0.8);
+  transform: scale(1.1);
+}
+
+.view-all-btn {
+  background: transparent;
+  border: 1px solid #ff6b6b;
+  color: #ff6b6b;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.view-all-btn:hover {
+  background: #ff6b6b;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* Music List */
+.music-list-wrapper {
+  position: relative;
+}
+
+.music-list {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px;
+  margin: -20px;
+}
+
+.music-list::-webkit-scrollbar {
+  display: none;
+}
+
+.music-list {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Music Items */
+.music-item {
+  flex: 0 0 auto;
+  width: 200px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 15px;
+  padding: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.music-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+}
+
+.item-image {
+  position: relative;
+  width: 100%;
+  height: 170px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+}
+
+.item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.music-item:hover .item-image img {
+  transform: scale(1.05);
+}
+
+.item-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.music-item:hover .item-overlay {
+  opacity: 1;
+}
+
+.item-overlay button {
+  background: rgba(0, 0, 0, 0.8);
+  border: none;
+  padding: 12px;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(5px);
+}
+
+.play-btn {
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+}
+
+.play-btn.playing {
+  background: rgba(76, 175, 80, 0.9) !important;
+  animation: pulse 2s infinite;
+}
+
+.add-btn {
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+}
+
+.item-overlay button:hover {
+  transform: scale(1.1);
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Item Info */
+.item-info {
+  text-align: left;
+}
+
+.item-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0 0 5px 0;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-subtitle {
+  font-size: 14px;
+  color: #888;
+  margin: 0 0 8px 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.item-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: #666;
+}
+
+.item-year {
+  font-size: 12px;
+  color: #666;
+  font-style: italic;
+}
+
+/* Artist Items */
+.artist-item .item-image {
+  border-radius: 50%;
+  height: 170px;
+}
+
+.artist-item .item-info {
+  text-align: center;
+}
+
+/* Album Items */
+.album-item .item-image {
+  height: 170px;
+}
+
+/* Song Items */
+.song-item .item-image {
+  height: 170px;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .music-item {
+    width: 180px;
+  }
+  
+  .item-image {
+    height: 150px;
+  }
+  
+  .artist-item .item-image {
+    height: 150px;
+  }
+}
+
+@media (max-width: 992px) {
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .section-controls {
+    align-self: flex-end;
+  }
+  
+  .music-item {
+    width: 160px;
+  }
+  
+  .item-image {
+    height: 140px;
+  }
+  
+  .artist-item .item-image {
+    height: 140px;
+  }
+}
+
+@media (max-width: 768px) {
+  .music-section {
+    padding: 0 10px;
+  }
+  
+  .section-header {
+    padding: 0 10px;
+  }
+  
+  .section-title {
+    font-size: 24px;
+  }
+  
+  .music-list {
+    padding: 15px 10px;
+    margin: -15px -10px;
+    gap: 15px;
+  }
+  
+  .music-item {
+    width: 140px;
+    padding: 12px;
+  }
+  
+  .item-image {
+    height: 120px;
+    margin-bottom: 10px;
+  }
+  
+  .artist-item .item-image {
+    height: 120px;
+  }
+  
+  .item-title {
+    font-size: 14px;
+  }
+  
+  .item-subtitle {
+    font-size: 12px;
+  }
+  
+  .scroll-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 16px;
+  }
+  
+  .view-all-btn {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-controls {
+    gap: 8px;
+  }
+  
+  .music-item {
+    width: 120px;
+    padding: 10px;
+  }
+  
+  .item-image {
+    height: 100px;
+  }
+  
+  .artist-item .item-image {
+    height: 100px;
+  }
+  
+  .item-title {
+    font-size: 13px;
+  }
+  
+  .item-subtitle {
+    font-size: 11px;
+  }
+}
