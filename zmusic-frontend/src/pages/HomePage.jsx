@@ -188,19 +188,7 @@ function HomePage() {
         </div>
         
         <div className="content-sections">
-          <MusicSection 
-            title="BXH Nhạc Mới" 
-            subtitle="Top những bài hát được nghe nhiều nhất"
-            items={getTopHits}
-            type="song"
-          />
-          
-          <MusicSection 
-            title="Mới Phát Hành" 
-            subtitle="Những bài hát mới nhất từ các nghệ sĩ"
-            items={getNewReleases}
-            type="song"
-          />
+         
           
           <MusicSection 
             title="Tất Cả Bài Hát" 
@@ -223,11 +211,11 @@ function HomePage() {
       <Footer />
       
       {/* Debug components */}
-      <MusicPlayerDebug />
+      {/* <MusicPlayerDebug />
       
       <UserDebugInfo />
       <AdminTestButton />
-      <QuickAuthTest />
+      <QuickAuthTest /> */}
      
     </div>
   );

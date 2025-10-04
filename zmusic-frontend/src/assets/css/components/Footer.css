@@ -217,6 +217,7 @@
 .footer-bottom-links {
   display: flex;
   gap: 25px;
+ 
 }
 
 .footer-bottom-links a {

@@ -30,7 +30,7 @@
 
 /* Animated Banner Section */
 .animated-banner {
-  margin-top: 1470px;
+  margin-top: 500px;
   position: relative;
   min-height: 40vh;
   max-height: 280px;
@@ -400,8 +400,8 @@
   background: rgba(255, 107, 107, 0.8);
 }
 
-/* Loading animations - Tạm thời tắt để debug */
-/*
+
+
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -423,7 +423,7 @@
 .content-sections > *:nth-child(4) { animation-delay: 0.4s; }
 .content-sections > *:nth-child(5) { animation-delay: 0.5s; }
 .content-sections > *:nth-child(6) { animation-delay: 0.6s; }
-*/
+
 
 /* Responsive adjustments */
 @media (max-width: 768px) {

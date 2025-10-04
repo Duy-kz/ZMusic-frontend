@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useRef, useEffect } from 'react';
+import { Snackbar, Alert } from '@mui/material';
 
 const MusicPlayerContext = createContext();
 
@@ -18,6 +19,7 @@ export const MusicPlayerProvider = ({ children }) => {
   const [duration, setDuration] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [snackbar, setSnackbar] = useState({ open: false, message: '', severity: 'info' });
   
   const audioRef = useRef(null);
 
@@ -107,25 +109,19 @@ export const MusicPlayerProvider = ({ children }) => {
       
       // Handle different URL types
       if (urlType === 'youtube') {
-        // For YouTube, we would need to extract audio URL or use YouTube API
-        // For now, show a message that YouTube is not supported yet
         throw new Error('Hiện tại chưa hỗ trợ phát từ YouTube. Vui lòng sử dụng link audio trực tiếp.');
       } else if (urlType === 'backend') {
-        // File từ backend wwwroot - cần build full URL
         finalUrl = buildBackendUrl(song.filePath);
         console.log('🏗️ Built backend URL:', finalUrl);
         
-        // Test if URL is accessible
         const isAccessible = await testUrlAccessibility(finalUrl);
         if (!isAccessible) {
           throw new Error(`Không thể truy cập file từ backend: ${finalUrl}. Kiểm tra backend có đang chạy không?`);
         }
       } else if (urlType === 'blob') {
-        // Blob URL từ file upload tạm thời
         finalUrl = song.filePath;
         console.log('📁 Using blob URL:', finalUrl);
       } else if (urlType === 'audio' || urlType === 'local' || urlType === 'online') {
-        // Direct audio URL - can be played directly
         finalUrl = song.filePath;
         console.log('🎯 Using direct URL:', finalUrl);
       }
@@ -134,10 +130,11 @@ export const MusicPlayerProvider = ({ children }) => {
         console.log('🎯 Setting audio source:', finalUrl);
         audioRef.current.src = finalUrl;
         
-        // Add error handling for audio loading
         audioRef.current.onerror = (e) => {
           console.error('❌ Audio load error:', e);
-          setError(`Không thể tải file nhạc: ${finalUrl}`);
+          const errorMsg = `Không thể tải file nhạc: ${finalUrl}`;
+          setError(errorMsg);
+          setSnackbar({ open: true, message: errorMsg, severity: 'error' });
           setIsPlaying(false);
         };
         
@@ -146,6 +143,7 @@ export const MusicPlayerProvider = ({ children }) => {
 
       setCurrentSong(song);
       setIsPlaying(true);
+      setSnackbar({ open: true, message: `Đang phát: ${song.title}`, severity: 'success' });
       
       if (audioRef.current) {
         console.log('▶️ Starting playback...');
@@ -262,7 +260,16 @@ export const MusicPlayerProvider = ({ children }) => {
     changeVolume,
     
     // Utils
-    getUrlType
+    getUrlType,
+    
+    // Snackbar
+    showSnackbar: (message, severity = 'info') => {
+      setSnackbar({ open: true, message, severity });
+    }
+  };
+
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
   };
 
   return (
@@ -274,6 +281,24 @@ export const MusicPlayerProvider = ({ children }) => {
         preload="metadata"
         style={{ display: 'none' }}
       />
+      
+      {/* Snackbar notifications */}
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={4000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
+        sx={{ mb: 10 }}
+      >
+        <Alert 
+          onClose={handleCloseSnackbar} 
+          severity={snackbar.severity}
+          variant="filled"
+          sx={{ width: '100%' }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </MusicPlayerContext.Provider>
   );
 };
